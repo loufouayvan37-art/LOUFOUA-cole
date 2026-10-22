@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>École Internationale Marie Curie</title>
+<style>
+:root{
+  --bleu: #003C5f;
+  --or: rgb(199, 145, 83);
+  --sable: rgb(233, 227, 219);
+}
+*,*::before,*::after{
+  margin:0; 
+  padding:0; 
+  box-sizing:border-box; 
+}
+html{
+  scroll-behavior:smooth; 
+  scroll-padding-top:110px; 
+}
+body{
+  background:var(--sable); 
+  font-family:Arial, Helvetica, sans-serif; 
+  color:#222; 
+  line-height:1.5; 
+}
+img{
+  max-width:100%; 
+  height:auto; 
+  display:block; 
+}
+a:focus-visible{
+  outline:3px solid rgb(50,75,214); 
+  outline-offset:3px; 
+}
+.or{
+  color:var(--or); 
+}
+.pad{ 
+  padding:clamp(3rem,8vw,5rem) clamp(1rem,4vw,3rem); 
+}
+
+/* ---------- En-tête (sticky : plus besoin de décaler le contenu) ---------- */
+.site-header{
+  position:sticky; top:0; z-index:100;
+  display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;
+  gap:.5rem 1rem; min-height:75px;
+  padding:.5rem clamp(1rem,4vw,3rem);
+  background:rgba(173, 213, 247, 0.699);
+  backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);
+}
+.logo{
+  display:flex; align-items:center; gap:.6rem;
+  font-family:'Trebuchet MS','Lucida Sans Unicode','Lucida Grande','Lucida Sans',Arial,sans-serif;
+  font-size:clamp(14px,3.8vw,18px); font-weight:bold; line-height:1.2;
+}
+.logo img{
+  height:50px; 
+  width:auto; 
+  animation:tourne 5s ease infinite; 
+}
+@keyframes tourne{
+  to{
+    transform:rotateY(360deg); 
+  }
+}
+.site-header nav ul{
+  display:flex; 
+  gap:clamp(.8rem,3vw,2rem); 
+  list-style:none; 
+}
+.site-header nav a{
+  font-family:Verdana, Geneva, Tahoma, sans-serif; font-size:clamp(13px,3.4vw,16px);
+  color:#490e0e; text-decoration:none; transition:color .3s;
+}
+.site-header nav a:hover{ color:rgb(5,150,12); }
+@media (max-width:560px){
+  .site-header{ justify-content:center; }
+}
+
+/* ---------- Boutons ---------- */
+.actions{ display:flex; flex-wrap:wrap; gap:1rem; margin-top:2rem; }
+.btn{
+  display:inline-block; background:#e6b55a; padding:10px 25px; border-radius:20px;
+  box-shadow:0 6px #efa424; color:#fff; text-decoration:none;
+  font-family:Verdana, Geneva, Tahoma, sans-serif; font-size:15px;
+  transition:transform .15s, box-shadow .15s;
+}
+.btn:hover{ box-shadow:0 3px #efa424; transform:translateY(3px); }
+.btn:active{ box-shadow:0 0 #efa424; transform:translateY(6px); }
+.bleu{
+  display:inline-block; background:rgba(255,255,255,.185); border:1px solid #efa424;
+  padding:10px 20px; border-radius:20px; color:#efa424; text-decoration:none; font-size:16px;
+  font-family:system-ui,-apple-system,'Segoe UI',Roboto,Ubuntu,'Helvetica Neue',sans-serif;
+  transition:background .3s;
+}
+.bleu:hover{
+  background:var(--bleu); 
+}
+
+@media (max-width:480px){
+  .actions a{
+   flex:1 1 100%; text-align:center;
+  }
+}
+
+/* ---------- Accueil ---------- */
+.debut{
+  min-height:clamp(480px,85vh,791px);
+  display:flex; 
+  flex-direction:column;
+  justify-content:center;
+  padding:4rem clamp(1rem,6vw,5rem);
+  background:#5b84a8 url(./fondg.png) center / cover no-repeat;
+}
+.debut h1{
+  font-family:serif; 
+  font-style:oblique;
+  font-weight:bold; 
+  line-height:1.1;
+  font-size:clamp(2.25rem,7vw,5.3rem); 
+  color:rgb(41,39,39);
+  animation: texte 2s ;
+            
+}
+@keyframes texte {
+  0%{
+    transform:translateY(0) ;
+  } 
+            
+  100%{
+   transform:translateY(25px) ;
+  }
+}
+
+.leaders{
+  color:rgb(180,206,230); 
+}
+.debut p{
+  margin-top:2rem; max-width:40ch;
+  font-family:system-ui,-apple-system,'Segoe UI',Roboto,Ubuntu,'Helvetica Neue',sans-serif;
+  font-size:clamp(1rem,3vw,1.5rem);
+  font-style:italic; 
+  color:rgb(249,255,255);
+}
+@media (max-width:768px){
+  .debut{ text-align:center; align-items:center; }
+}
+
+/* ---------- Programme ---------- */
+#Programme{
+  background:linear-gradient(135deg,#e6f4ff,#cce9ff); 
+}
+h2.titre{
+  font-family:serif; 
+  font-style:oblique; line-height:1.1; 
+  color:var(--bleu);
+  font-size:clamp(2rem,6vw,4.4rem); 
+  margin-bottom:2.5rem;
+}
+.niveaux{
+  display:grid; 
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr)); 
+  gap:1.5rem; 
+}
+.niveau{
+  background:rgba(255,255,255,.6); 
+  border-radius:12px; 
+  padding:1.25rem;
+  box-shadow:0 8px 15px rgba(0,60,95,.1);
+  transition:transform .3s ease, box-shadow .3s ease;
+}
+.niveau:hover{
+  transform:translateY(-10px); 
+  box-shadow:0 12px 24px rgba(0,60,95,.2); 
+}
+.niveau h3{
+  font-size:1.5rem; 
+  color:var(--bleu); 
+  margin-bottom:.75rem; 
+}
+.niveau img{
+  width:100%; 
+  aspect-ratio:4/3; 
+  object-fit:cover; 
+  border-radius:10px; 
+  margin-bottom:1rem; 
+}
+
+/* ---------- Admission ---------- */
+#Admission{
+  display:grid; 
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));
+  gap:2.5rem; 
+  align-items:center;
+}
+#Admission h2{
+  font-family:'Times New Roman',Times,serif; 
+  font-style:oblique; 
+  line-height:1.1;
+  font-size:clamp(1.9rem,5vw,4rem); 
+  color:var(--bleu);
+}
+#Admission h3{
+  margin:2rem 0 1rem; 
+  font-size:clamp(1.05rem,3vw,1.4rem); 
+  font-family:system-ui,sans-serif; 
+}
+#Admission p{
+  font-size:clamp(1rem,2.5vw,1.15rem); 
+  font-family:system-ui,sans-serif; 
+}
+@media (max-width:768px){
+  #Admission{
+    text-align:center; 
+  }
+  #Admission .actions{ 
+    justify-content:center; 
+  }
+}
+
+/* Carrousel : s'adapte à la largeur disponible */
+#caroussel{
+  width:100%; 
+  max-width:480px; 
+  margin-inline:auto;
+  aspect-ratio:430/420; 
+  border-radius:20px; 
+  overflow:hidden;
+}
+.images{
+  display:flex; 
+  width:400%; 
+  height:100%; 
+  animation:mesImages 15s infinite; 
+}
+.images img{
+  width:25%; 
+  height:100%; 
+  object-fit:cover; 
+  flex:none; 
+}
+@keyframes mesImages{
+  0%,20%{
+    transform:translateX(0); 
+  }
+  25%,45%{
+    transform:translateX(-25%); 
+  }
+  50%,70%{
+    transform:translateX(-50%); 
+  }
+  75%,95%{
+    transform:translateX(-75%); 
+  }
+  100%{
+    transform:translateX(0); 
+  }
+}
+
+/* ---------- Frais ---------- */
+#Frais{ border-top:1px outset #222; text-align:center; }
+#Frais h2{
+  font-family:serif; font-style:oblique; line-height:1.1; color:var(--bleu);
+  font-size:clamp(1.8rem,5vw,3.4rem); margin-bottom:1rem;
+}
+#Frais .intro{ font-family:system-ui,sans-serif; font-size:clamp(1rem,2.5vw,1.15rem); margin:0 auto; max-width:60ch; }
+.tarifs{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));
+  gap:1.5rem; max-width:1200px; margin:2.5rem auto 0;
+}
+.tarif{
+  display:flex; flex-direction:column; text-align:left; background:#fff; border-radius:15px;
+  box-shadow:0 0 10px rgba(83,79,79,.47);
+  transition:transform .3s ease, box-shadow .3s ease;
+}
+.tarif:hover{ transform:translateY(-6px); box-shadow:0 0 20px rgba(53,51,51,.63); }
+.tarif-tete{ padding:1.2rem; border-bottom:2px solid rgb(250,232,129); }
+.tarif-tete h3{ font-size:1.7rem; color:rgb(50,75,214); font-family:'Lucida Sans','Lucida Grande',Geneva,Verdana,sans-serif; }
+.tarif-tete .prix{ font-size:1.4rem; font-weight:bold; color:#3b3c3d; margin-top:.5rem; }
+.tarif-tete .detail{ color:#3b3c3d; }
+.tarif ul{ list-style:none; padding:1.2rem; flex:1; }
+.tarif li{ margin-bottom:.6rem; font-weight:bold; font-size:.95rem; }
+.tarif-pied{ padding:1.2rem; text-align:center; }
+.tb{
+  display:inline-block; background:#fff; border:1px solid #020202; padding:10px 20px; border-radius:20px;
+  color:#003C5f; text-decoration:none; font-family:system-ui,sans-serif; transition:background .3s, color .3s;
+}
+.tb:hover{ background:rgb(50,75,214); color:#fff; }
+
+footer{ background:#000; color:aliceblue; text-align:center; padding:1.5rem 1rem; }
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{ animation:none !important; transition:none !important; }
+  html{ scroll-behavior:auto; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="logo">
+    <img src="logo27.jpg" alt="Logo de l'école">
+    <p>École Internationale <br><span class="or">MARIE CURIE</span></p>
+  </div>
+  <nav aria-label="Navigation principale">
+    <ul>
+      <li><a href="#Programme">Programme</a></li>
+      <li><a href="#Admission">Admission</a></li>
+      <li><a href="#Frais">Frais</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section class="debut">
+    <h1>Former les <br><span class="leaders">leaders<br>de demain</span></h1>
+    <p>Un cursus scolaire d'excellence, une préparation aux meilleures universités nationales et internationales.</p>
+    <div class="actions">
+      <a class="btn" href="formulaire.html">Déposer une candidature ➡</a>
+      <a class="bleu" href="tel:+242044106746">📞 Nous appeler</a>
+    </div>
+  </section>
+
+  <section id="Programme" class="pad">
+    <h2 class="titre">Un parcours <br><span class="or">d'excellence</span></h2>
+    <div class="niveaux">
+      <article class="niveau">
+        <h3>Primaire</h3>
+        <img src="Primaireimg.png" alt="Élèves du primaire">
+        <p>Une fondation solide en français et anglais, développant la curiosité intellectuelle et l'amour de l'apprentissage.</p>
+      </article>
+      <article class="niveau">
+        <h3>Collège</h3>
+        <img src="Collège002.jpg" alt="Élèves du collège">
+        <p>Un programme interdisciplinaire qui développe l'esprit critique et la conscience intellectuelle.</p>
+      </article>
+      <article class="niveau">
+        <h3>Lycée</h3>
+        <img src="Lycée01.png" alt="Élèves du lycée">
+        <p>Préparation rigoureuse aux examens d'État et concours professionnels avec un accompagnement personnalisé.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="Admission" class="pad">
+    <article>
+      <h2>Prêt à rejoindre <br><span class="or">notre communauté ?</span></h2>
+      <h3>📅 Date importante : <br>05 octobre 2026 : rentrée scolaire</h3>
+      <p>Les admissions pour l'année scolaire 2026-2027 sont ouvertes. Déposez votre dossier dès aujourd'hui et rejoignez-nous.</p>
+      <div class="actions">
+        <a class="btn" href="formulaire.html">Déposer une candidature ➡</a>
+        <a class="bleu" href="tel:+242044106746">📞 Nous appeler</a>
+      </div>
+    </article>
+    <article>
+      <div id="caroussel">
+        <div class="images">
+          <img src="R_ECOLE_REUNION.png" alt="Réunion">
+          <img src="R_Salle.png" alt="Salles de classe">
+          <img src="rocket.png" alt="Fêtes de l'école">
+          <img src="R_Tableau.png" alt="Tableau">
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <section id="Frais" class="pad">
+    <h2>Investir dans <br>l'avenir de votre enfant</h2>
+    <p class="intro">Des tarifs transparents incluant la majorité des activités. Des réductions disponibles pour les familles nombreuses.</p>
+
+    <div class="tarifs">
+      <article class="tarif">
+        <div class="tarif-tete">
+          <h3>École primaire</h3>
+          <p class="prix">85 000 FCFA</p>
+          <p class="detail">par ans, 10 000 FCFA/mois</p>
+        </div>
+        <ul>
+          <li>✔ Cursus bilingue FR/EN</li>
+          <li>✔ Programme français et congolais</li>
+          <li>✔ Activités parascolaires incluses</li>
+          <li>✔ Suivi personnalisé</li>
+        </ul>
+        <div class="tarif-pied"><a class="tb" href="formulaire.html">S'INSCRIRE</a></div>
+      </article>
+
+      <article class="tarif">
+        <div class="tarif-tete">
+          <h3>Collège</h3>
+          <p class="prix">135 000 FCFA</p>
+          <p class="detail">par ans, 13 500 FCFA/mois</p>
+        </div>
+        <ul>
+          <li>✔ Cursus bilingue FR/EN</li>
+          <li>✔ Programme français et congolais</li>
+          <li>✔ Activités parascolaires incluses</li>
+          <li>✔ Activités physiques et sportives</li>
+          <li>✔ Suivi personnalisé</li>
+        </ul>
+        <div class="tarif-pied"><a class="tb" href="formulaire.html">S'INSCRIRE</a></div>
+      </article>
+
+      <article class="tarif">
+        <div class="tarif-tete">
+          <h3>Lycée</h3>
+          <p class="prix">150 000 FCFA</p>
+          <p class="detail">par ans, 15 000 FCFA/mois</p>
+        </div>
+        <ul>
+          <li>✔ Cursus bilingue FR/EN</li>
+          <li>✔ Programme français et congolais</li>
+          <li>✔ Activités parascolaires incluses</li>
+          <li>✔ Activités physiques et sportives</li>
+          <li>✔ Suivi personnalisé</li>
+        </ul>
+        <div class="tarif-pied"><a class="tb" href="formulaire.html">S'INSCRIRE</a></div>
+      </article>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>Admissions ouvertes 2026-2027 <br>© 2026 École Internationale Marie Curie. Tous droits réservés.</p>
+</footer>
+
+</body>
+</html>

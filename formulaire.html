@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Formulaire</title>
+<style>
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+}
+
+body{
+  background: linear-gradient(45deg, #FC466B, #3F5EFB);
+  background-attachment: fixed;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem 1rem;
+  overflow-x: hidden;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Le conteneur prend la taille du formulaire.
+   Les blocs décoratifs sont positionnés en % par rapport à lui :
+   ils suivent donc toujours le formulaire. */
+.container{
+  position: relative;
+  isolation: isolate;               /* garde les z-index négatifs à l'intérieur */
+  width: min(328px, 72vw);
+}
+
+form{
+  background: rgba(255, 255, 255, .3);
+  padding: 3rem clamp(1rem, 8vw, 3rem);
+  border-radius: 20px;
+  border-left: 1px solid rgba(255, 255, 255, .3);
+  border-top: 1px solid rgba(255, 255, 255, .3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 20px 20px 40px -6px rgba(0, 0, 0, .2);
+  text-align: center;
+}
+
+p{
+  color: white;
+  font-weight: 500;
+  opacity: .7;
+  font-size: clamp(1.1rem, 4.5vw, 1.4rem);
+  margin-bottom: 25px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, .2);
+}
+
+a{
+  display: inline-block;
+  margin-top: 10px;
+  color: #ddd;
+  text-decoration: none;
+  font-size: 12px;
+  transition: all .3s;
+}
+a:hover{
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, .5);
+}
+
+input{
+  display: block;
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-radius: 50px;
+  border-left: 1px solid rgba(255, 255, 255, .3);
+  border-top: 1px solid rgba(255, 255, 255, .3);
+  padding: 1rem;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  box-shadow: 4px 4px 60px rgba(0, 0, 0, .2);
+  color: white;
+  font-weight: 500;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, .2);
+  transition: all .3s;
+  margin-top: 10px;
+}
+
+::placeholder{
+  color: white;
+}
+
+input:hover{
+  background: rgba(255, 255, 255, .1);
+  box-shadow: 4px 4px 60px 8px rgba(0, 0, 0, .2);
+}
+
+input[type="button"]{
+  cursor: pointer;
+  margin: 20px auto 0;
+  font-size: 1rem;
+  width: 150px;
+  max-width: 100%;
+}
+
+/* ---------- Blocs décoratifs ---------- */
+.drop{
+  position: absolute;
+  aspect-ratio: 1 / 1;              /* reste carré à toutes les tailles */
+  background: rgba(255, 255, 255, .3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-left: 1px solid rgba(255, 255, 255, .3);
+  border-top: 1px solid rgba(255, 255, 255, .3);
+  border-radius: 10px;
+  box-shadow: 10px 10px 60px -8px rgba(0, 0, 0, .2);
+  pointer-events: none;
+}
+
+/* haut gauche (petit) */
+.drop-4{
+  width: 25%;
+  top: -7%;
+  left: -12%;
+  z-index: -1;
+}
+/* haut droite (grand) */
+.drop-1{
+  width: 37%;
+  top: -14%;
+  left: 76%;
+}
+/* milieu droite (derrière le formulaire) */
+.drop-3{
+  width: 27%;
+  top: 37%;
+  left: 82%;
+  z-index: -1;
+}
+/* bas droite */
+.drop-2{
+  width: 25%;
+  top: 90%;
+  left: 87%;
+}
+/* caché derrière le formulaire */
+.drop-5{
+  width: 18%;
+  top: 40%;
+  left: 45%;
+  z-index: -1;
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <!-- Formulaire -->
+  <form action="">
+    <p>INSCRIPTION</p>
+    <input type="text" placeholder="Nom complet">
+    <input type="email" placeholder="E-mail">
+    <input type="date" placeholder="date de naissance" >
+    <input type="text" placeholder="Classe">
+    <input type="button" value="Frais d'inscription">
+    <a href="index02.html">Revenir au site</a>
+  </form>
+
+  <!-- Blocs décoratifs -->
+  <div class="drop drop-1"></div>
+  <div class="drop drop-2"></div>
+  <div class="drop drop-3"></div>
+  <div class="drop drop-4"></div>
+  <div class="drop drop-5"></div>
+</div>
+</body>
+</html>

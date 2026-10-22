@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Historique des scans</title>
+  <style>
+    body { font-family: sans-serif; margin: 0; padding: 20px; background: #f4f6fb; }
+    h1 { text-align: center; color: #0b3d91; }
+    #dernier { background: #e8f5e9; border-radius: 12px; padding: 20px; text-align: center;
+               font-size: 1.6em; margin-bottom: 20px; display: none; }
+    table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 12px; overflow: hidden; }
+    th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+    th { background: #0b3d91; color: #fff; }
+    .actions { text-align: center; margin-top: 20px; }
+    button, a.btn { padding: 12px 24px; font-size: 1em; border: 0; border-radius: 8px;
+                    background: #0b3d91; color: #fff; text-decoration: none; margin: 4px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>Historique des scans</h1>
+  <div id="dernier"></div>
+
+  <table>
+    <thead><tr><th>Date</th><th>Heure</th><th>Contenu du QR code</th></tr></thead>
+    <tbody id="liste"></tbody>
+  </table>
+
+  <div class="actions">
+    <a class="btn" href="scan.html">Nouveau scan</a>
+    <button onclick="effacer()">Effacer l'historique</button>
+  </div>
+
+  <script>
+    const CLE = 'historique_scans';
+    const params = new URLSearchParams(location.search);
+    const code = params.get('code');
+
+    let historique = [];
+    try { historique = JSON.parse(localStorage.getItem(CLE)) || []; } catch (e) {}
+
+    // Nouveau scan : on l'enregistre
+    if (code) {
+      historique.unshift({ code: code, date: new Date().toISOString() });
+      historique = historique.slice(0, 500);   // garde les 500 derniers
+      localStorage.setItem(CLE, JSON.stringify(historique));
+
+      // Retire ?code=... de l'adresse pour éviter un doublon si la page se recharge
+      history.replaceState(null, '', location.pathname);
+
+      const d = document.getElementById('dernier');
+      d.style.display = 'block';
+      d.textContent = '✔ Scan enregistré : ' + code;
+
+      // Retour automatique au scan après 5 secondes
+      setTimeout(() => { location.href = 'scan.html'; }, 5000);
+    }
+
+    // Affichage (textContent : sécurisé, quel que soit le contenu du QR code)
+    const liste = document.getElementById('liste');
+    historique.forEach(h => {
+      const dt = new Date(h.date);
+      const tr = document.createElement('tr');
+      [dt.toLocaleDateString('fr-FR'), dt.toLocaleTimeString('fr-FR'), h.code].forEach(txt => {
+        const td = document.createElement('td');
+        td.textContent = txt;
+        tr.appendChild(td);
+      });
+      liste.appendChild(tr);
+    });
+
+    function effacer() {
+      if (confirm("Effacer tout l'historique ?")) {
+        localStorage.removeItem(CLE);
+        location.href = 'historique.html';
+      }
+    }
+  </script>
+</body>
+</html>
